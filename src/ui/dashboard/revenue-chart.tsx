@@ -1,6 +1,6 @@
 import { generateYAxis } from '@/src/lib/utils';
 import { CalendarIcon } from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
+import { lusitana } from '@/src/ui/fonts';
 import { Revenue } from '@/src/lib/definitions';
 
 // This component is representational only.
