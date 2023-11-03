@@ -1,4 +1,4 @@
-import AcmeLogo from '@/app/ui/acme-logo';
+import AcmeLogo from '@/src/ui/acme-logo';
 
 import Link from 'next/link';
 export default function Page() {
