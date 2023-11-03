@@ -1,6 +1,8 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
 import AcmeLogo from '@/src/ui/acme-logo';
 
-import Link from 'next/link';
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
@@ -25,6 +27,23 @@ export default function Page() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           {/* Add Hero Images Here */}
+          <Image 
+            src="/hero-desktop.png"
+            alt="Screenshots of the dashboard project showing desktop version"
+            width={1000}
+            height={760}
+            className='hidden md:block'
+            quality={100}
+          />
+
+          <Image 
+            src="/hero-mobile.png"
+            alt="Screenshot of the dashboard project showing mobile version"
+            width={560}
+            height={620}
+            className='block md:hidden'
+            quality={100}
+          />
         </div>
       </div>
     </main>
