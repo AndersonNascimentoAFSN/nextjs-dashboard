@@ -142,6 +142,9 @@ export async function fetchFilteredInvoices(
 export async function fetchInvoicesPages(query: string) {
   noStore();
   try {
+    // console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
     const count = await sql`SELECT COUNT(*)
     FROM invoices
     JOIN customers ON invoices.customer_id = customers.id
@@ -152,6 +155,8 @@ export async function fetchInvoicesPages(query: string) {
       invoices.date::text ILIKE ${`%${query}%`} OR
       invoices.status ILIKE ${`%${query}%`}
   `;
+  
+    // console.log('Data fetch complete after 5 seconds.');
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;

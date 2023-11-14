@@ -6,8 +6,9 @@ import { lusitana } from '@/src/ui/fonts';
 import { InvoicesTableSkeleton } from '@/src/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/src/lib/data';
+import { WrapperPagination } from '@/src/ui/invoices/wrapper-pagination';
 
-export default async function Invoices(
+export default function Invoices(
   {
     searchParams,
   }: {
@@ -19,7 +20,7 @@ export default async function Invoices(
 ) {
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchInvoicesPages(query);
+  // const totalPages = await fetchInvoicesPages(query);
 
   return (
     <div className="w-full">
@@ -34,7 +35,10 @@ export default async function Invoices(
         <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <WrapperPagination query={query} />
+        </Suspense>
+        {/* <Pagination totalPages={totalPages} query={query}/> */}
       </div>
     </div>
   )
