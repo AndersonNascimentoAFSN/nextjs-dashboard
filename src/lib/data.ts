@@ -111,6 +111,9 @@ export async function fetchFilteredInvoices(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
+    // console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
     const invoices = await sql<InvoicesTable>`
       SELECT
         invoices.id,
@@ -131,6 +134,8 @@ export async function fetchFilteredInvoices(
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
+
+    // console.log('Data fetch complete after 5 seconds.');
 
     return invoices.rows;
   } catch (error) {
@@ -155,7 +160,7 @@ export async function fetchInvoicesPages(query: string) {
       invoices.date::text ILIKE ${`%${query}%`} OR
       invoices.status ILIKE ${`%${query}%`}
   `;
-  
+
     // console.log('Data fetch complete after 5 seconds.');
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
