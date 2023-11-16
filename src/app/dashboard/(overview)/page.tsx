@@ -4,6 +4,11 @@ import RevenueChart from '@/src/ui/dashboard/revenue-chart'
 import LatestInvoices from '@/src/ui/dashboard/latest-invoices'
 import { CardsSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from '@/src/ui/skeletons'
 import CardWrapper from '@/src/ui/dashboard/cards';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Overview',
+};
 
 export default function Page() {
   return (

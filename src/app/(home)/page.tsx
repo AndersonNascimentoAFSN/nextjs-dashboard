@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
 import AcmeLogo from '@/src/ui/acme-logo';
+
+export const metadata: Metadata = {
+  title: 'Home',
+};
 
 export default function Page() {
   return (
