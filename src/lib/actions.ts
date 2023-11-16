@@ -4,7 +4,7 @@ import { sql } from '@vercel/postgres'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 
 const InvoicesSchema = z.object({
   id: z.string(),
@@ -125,13 +125,16 @@ export async function authenticate(
       password: formData.get('password'),
     }
 
-    await signIn('credentials', credentials, redirect('/dashboard'));
-    // await signIn('credentials', Object.fromEntries(formData), redirect('/dashboard'));
-
+    await signIn('credentials', { ...credentials, redirectTo: '/dashboard' });
+    // await signIn('credentials',  { ...Object.fromEntries(formData), redirectTo: '/dashboard' });
   } catch (error) {
     if ((error as Error).message.includes('CredentialsSignin')) {
       return 'CredentialsSignin';
     }
     throw error;
   }
+}
+
+export async function logOut() {
+  await signOut({ redirectTo: '/login' });
 }
