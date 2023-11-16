@@ -218,6 +218,9 @@ export async function fetchCustomers() {
 export async function fetchFilteredCustomers(query: string) {
   noStore();
   try {
+    // console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
     const data = await sql<CustomersTable>`
 		SELECT
 		  customers.id,
@@ -235,6 +238,8 @@ export async function fetchFilteredCustomers(query: string) {
 		GROUP BY customers.id, customers.name, customers.email, customers.image_url
 		ORDER BY customers.name ASC
 	  `;
+
+    // console.log('Data fetch complete after 5 seconds.');
 
     const customers = data.rows.map((customer) => ({
       ...customer,
