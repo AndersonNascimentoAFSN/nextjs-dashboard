@@ -120,7 +120,14 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', Object.fromEntries(formData));
+    const credentials = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+    }
+
+    await signIn('credentials', credentials, redirect('/dashboard'));
+    // await signIn('credentials', Object.fromEntries(formData), redirect('/dashboard'));
+
   } catch (error) {
     if ((error as Error).message.includes('CredentialsSignin')) {
       return 'CredentialsSignin';
