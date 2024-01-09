@@ -140,3 +140,51 @@ export async function logOut() {
   await signOut();
   // await signOut({ redirectTo: '/login' });
 }
+
+export async function createEdgeConfig({ slug }: { slug: string }) {
+  try {
+    const createEdgeConfig = await fetch(
+      'https://api.vercel.com/v1/edge-config',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.VERCEL_REST_API_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          slug: slug,
+        }),
+      },
+    );
+    const result = await createEdgeConfig.json();
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+} 
+
+export async function updateItems(item: any) {
+  const url = `${process.env.VERCEL_REST_API}/edge-config/${process.env.EDGE_ID}/items` 
+
+  try {
+    console.log('item', item)
+
+    const updated = await fetch(
+      url,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${process.env.VERCEL_REST_API_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-cache',
+        body: JSON.stringify({ "items": [item] }),
+      },
+    );
+    const result = await updated.json();
+    console.log('result', result)
+    return result
+  } catch (error) {
+    console.log(error);
+  }
+} 
