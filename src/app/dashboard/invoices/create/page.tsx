@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Form from '@/src/ui/invoices/create-form'
 import Breadcrumbs from '@/src/ui/invoices/breadcrumbs'
 import { fetchCustomers } from '@/src/lib/data'
+import { Header } from '@/src/components/Header';
+import { CreateInvoiceTemplate } from '@/src/components/Templates/CreateInvoiceTemplate';
 
 export const metadata: Metadata = {
   title: 'Invoices Create',
@@ -13,7 +15,7 @@ export default async function Create() {
 
   return (
     <main>
-      <Breadcrumbs
+      {/* <Breadcrumbs
         breadcrumbs={[
           { label: 'Invoices', href: '/dashboard/invoices' },
           {
@@ -22,8 +24,11 @@ export default async function Create() {
             active: true,
           },
         ]}
-      />
-      <Form customers={customers} />
+      /> */}
+      {/* <Header />
+      <Form customers={customers} /> */}
+
+      <CreateInvoiceTemplate customers={customers} />
     </main>
   );
 }
