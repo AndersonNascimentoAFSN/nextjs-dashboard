@@ -5,7 +5,10 @@
     "dev": "next dev",
     "start": "next start",
     "seed": "node -r dotenv/config ./scripts/seed.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pw": "npx playwright test",
+    "pw:sr": "npx playwright show-report",
+    "pw:ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
